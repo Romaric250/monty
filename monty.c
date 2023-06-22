@@ -2,6 +2,14 @@
 
 #define BUFFER_SIZE 1024
 
+instruction_t instruction[] = {
+    {"pint", pint},
+    {"push", push},
+    {"pall", pall},
+    /* Other opcodes */
+    {NULL, NULL}
+};
+
 /**
  * main - Entry point for the Monty Bytecode Interpreter.
  * @argc: Number of command-line arguments.
@@ -39,6 +47,7 @@ int main(int argc, char **argv)
         {
             instruction.f(&stack, line_number);
         }
+
         else
         {
             fprintf(stderr, "L%u: unknown instruction %s\n", line_number, instruction.opcode);

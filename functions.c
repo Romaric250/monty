@@ -86,21 +86,6 @@ void pall(stack_t **stack, unsigned int line_number)
         }
 }
 
-/**
- * pint - Prints the value at the top of the stack, followed by a newline.
- * @stack: Pointer to the top of the stack.
- * @line_number: Line number in the Monty byte code file.
- */
-void pint(stack_t **stack, unsigned int line_number)
-{
-        if (*stack == NULL)
-        {
-                fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
-                exit(EXIT_FAILURE);
-        }
-
-        printf("%d\n", (*stack)->n);
-}
 
 /**
  * parse_instruction - Parses an instruction in a line of Monty bytecode.
@@ -128,6 +113,10 @@ int parse_instruction(char *line, instruction_t *instruction)
         {
                 instruction->f = pall;
         }
+	else if (strcmp(opcode, "pint") == 0)
+        {
+                instruction->f = pint;
+        }
         else
         {
                 return (0);
@@ -136,3 +125,19 @@ int parse_instruction(char *line, instruction_t *instruction)
         return (1);
 }
 
+
+/**
+ * pint - Prints the value at the top of the stack, followed by a new line.
+ * @stack: Double pointer to the beginning of the stack.
+ * @line_number: Line number of the opcode.
+ */
+ void pint(stack_t **stack, unsigned int line_number)
+{
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    printf("%d\n", (*stack)->n);
+}
