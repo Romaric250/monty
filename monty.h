@@ -50,6 +50,7 @@ int parse_instruction(char *line, instruction_t *instruction);
 void free_stack(stack_t *stack);
 
 /* opcode_functions.c */
+void swap(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);

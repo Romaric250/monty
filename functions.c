@@ -87,6 +87,20 @@ void pall(stack_t **stack, unsigned int line_number)
 }
 
 
+void swap(stack_t **stack, unsigned int line_number)
+{
+	int delete;
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    delete = (*stack)->n;
+    (*stack)->n = (*stack)->next->n;
+    (*stack)->next->n = delete;
+}
+
 void pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *empty;
@@ -100,6 +114,7 @@ void pop(stack_t **stack, unsigned int line_number)
     *stack = (*stack)->next;
     free(empty);
 }
+
 
 /**
  * parse_instruction - Parses an instruction in a line of Monty bytecode.
@@ -134,6 +149,10 @@ int parse_instruction(char *line, instruction_t *instruction)
 	else if (strcmp(opcode, "pop") == 0)
         {
                 instruction->f = pop;
+        }
+	else if (strcmp(opcode, "swap") == 0)
+        {
+                instruction->f = swap;
         }
         else
         {
