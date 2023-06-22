@@ -43,6 +43,12 @@ stack_t *add_node(stack_t **stack, int n)
     return (new_node);
 }
 
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+    (void) stack;
+    (void) line_number;
+}
 void add(stack_t **stack, unsigned int line_number)
 {
     if (*stack == NULL || (*stack)->next == NULL)
@@ -170,6 +176,10 @@ int parse_instruction(char *line, instruction_t *instruction)
 	else if (strcmp(opcode, "add") == 0)
 	{
 		instruction->f = add;
+	}
+	else if (strcmp(opcode, "nop") == 0)
+	{
+		instructions->f = nop;
 	}
         else
         {
