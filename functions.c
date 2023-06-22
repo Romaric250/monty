@@ -179,7 +179,7 @@ int parse_instruction(char *line, instruction_t *instruction)
 	}
 	else if (strcmp(opcode, "nop") == 0)
 	{
-		instructions->f = nop;
+	instruction->f = nope;	
 	}
         else
         {
