@@ -42,6 +42,19 @@ stack_t *add_node(stack_t **stack, int n)
 
     return (new_node);
 }
+
+void add(stack_t **stack, unsigned int line_number)
+{
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't add, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n += (*stack)->n;
+    pop(stack, line_number);
+}
+
 /**
  * push - Pushes an element to the stack.
  * @stack: Pointer to the top of the stack.
@@ -154,6 +167,10 @@ int parse_instruction(char *line, instruction_t *instruction)
         {
                 instruction->f = swap;
         }
+	else if (strcmp(opcode, "add") == 0)
+	{
+		instruction->f = add;
+	}
         else
         {
                 return (0);

@@ -43,13 +43,11 @@ typedef struct instruction_s
 
 extern int data_mode;
 
-/* Function prototypes */
-
-/* monty.c */
 int parse_instruction(char *line, instruction_t *instruction);
 void free_stack(stack_t *stack);
 
-/* opcode_functions.c */
+
+void add(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
