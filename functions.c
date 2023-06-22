@@ -87,6 +87,20 @@ void pall(stack_t **stack, unsigned int line_number)
 }
 
 
+void pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *empty;
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    empty = *stack;
+    *stack = (*stack)->next;
+    free(empty);
+}
+
 /**
  * parse_instruction - Parses an instruction in a line of Monty bytecode.
  * @line: Line of Monty bytecode.
@@ -116,6 +130,10 @@ int parse_instruction(char *line, instruction_t *instruction)
 	else if (strcmp(opcode, "pint") == 0)
         {
                 instruction->f = pint;
+        }
+	else if (strcmp(opcode, "pop") == 0)
+        {
+                instruction->f = pop;
         }
         else
         {

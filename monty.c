@@ -2,13 +2,6 @@
 
 #define BUFFER_SIZE 1024
 
-instruction_t instruction[] = {
-    {"pint", pint},
-    {"push", push},
-    {"pall", pall},
-    /* Other opcodes */
-    {NULL, NULL}
-};
 
 /**
  * main - Entry point for the Monty Bytecode Interpreter.
