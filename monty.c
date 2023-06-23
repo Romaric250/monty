@@ -4,11 +4,11 @@
 
 
 /**
- * main - Entry point for the Monty Bytecode Interpreter.
- * @argc: Number of command-line arguments.
- * @argv: Array of command-line argument strings.
+ * main - nt for the Monty Bytecode I
+ * @argc: Ner of command-line arguments.
+ * @argv: Array of -line argument strings.
  *
- * Return: EXIT_SUCCESS on success, EXIT_FAILURE on failure.
+ * Return: EXICESS on success, EXIT_FAILURE on failure.
  */
 int main(int argc, char **argv)
 {

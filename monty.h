@@ -54,4 +54,7 @@ void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
+
+int _strcmp(char *s1, char *s2);
+char *_strtok(char *str, const char *delim);
 #endif /* MONTY_H */
