@@ -207,7 +207,7 @@ int parse_instruction(char *line, instruction_t *instruction)
 {
         char *opcode = strtok(line, " \n\t");
 
-        if (opcode == NULL || *opcode == '#')
+        if (opcode == NULL || *opcode == '#' || *opcode == '\0')
         {
 		
                 return (0);
