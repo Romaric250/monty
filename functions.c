@@ -135,6 +135,67 @@ void pop(stack_t **stack, unsigned int line_number)
 }
 
 
+void mul(stack_t **stack, unsigned int line_number)
+{
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't mul, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n *= (*stack)->n;
+    pop(stack, line_number);
+}
+
+void div_m(stack_t **stack, unsigned int line_number)
+{
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't div, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    if ((*stack)->n == 0)
+    {
+        fprintf(stderr, "L%u: division by zero\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n /= (*stack)->n;
+    pop(stack, line_number);
+}
+
+void sub(stack_t **stack, unsigned int line_number)
+{
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n -= (*stack)->n;
+    pop(stack, line_number);
+}
+
+
+void mod(stack_t **stack, unsigned int line_number)
+{
+    if (*stack == NULL || (*stack)->next == NULL)
+    {
+        fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    if ((*stack)->n == 0)
+    {
+        fprintf(stderr, "L%u: division by zero\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    (*stack)->next->n %= (*stack)->n;
+    pop(stack, line_number);
+}
+
 /**
  * parse_instruction - Parses an instruction in a line of Monty bytecode.
  * @line: Line of Monty bytecode.
@@ -148,6 +209,7 @@ int parse_instruction(char *line, instruction_t *instruction)
 
         if (opcode == NULL || *opcode == '#')
         {
+		
                 return (0);
         }
 
@@ -169,14 +231,31 @@ int parse_instruction(char *line, instruction_t *instruction)
         {
                 instruction->f = pop;
         }
+	else if (_strcmp(opcode, "mul") == 0)
+        {
+                instruction->f = mul;
+        }
 	else if (_strcmp(opcode, "swap") == 0)
         {
                 instruction->f = swap;
+        }
+	else if (_strcmp(opcode, "mod") == 0)
+        {
+                instruction->f = mod;
         }
 	else if (_strcmp(opcode, "add") == 0)
 	{
 		instruction->f = add;
 	}
+	else if (_strcmp(opcode, "sub") == 0)
+        {
+                instruction->f = sub;
+        }
+	else if (_strcmp(opcode, "div_m") == 0)
+        {
+                instruction->f = div_m;
+        }
+
 	else if (_strcmp(opcode, "nop") == 0)
 	{
 	instruction->f = nop;	
