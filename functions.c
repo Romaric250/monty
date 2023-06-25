@@ -215,19 +215,19 @@ int parse_instruction(char *line, instruction_t *instruction)
 
         instruction->opcode = opcode;
 
-        if (_strcmp(opcode, "push") == 0)
+        if (strcmp(opcode, "push") == 0)
         {
                 instruction->f = push;
         }
-        else if (_strcmp(opcode, "pall") == 0)
+        else if (strcmp(opcode, "pall") == 0)
         {
                 instruction->f = pall;
         }
-	else if (_strcmp(opcode, "pint") == 0)
+	else if (strcmp(opcode, "pint") == 0)
         {
                 instruction->f = pint;
         }
-	else if (_strcmp(opcode, "pop") == 0)
+	else if (strcmp(opcode, "pop") == 0)
         {
                 instruction->f = pop;
         }
