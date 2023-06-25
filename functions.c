@@ -231,32 +231,32 @@ int parse_instruction(char *line, instruction_t *instruction)
         {
                 instruction->f = pop;
         }
-	else if (_strcmp(opcode, "mul") == 0)
+	else if (strcmp(opcode, "mul") == 0)
         {
                 instruction->f = mul;
         }
-	else if (_strcmp(opcode, "swap") == 0)
+	else if (strcmp(opcode, "swap") == 0)
         {
                 instruction->f = swap;
         }
-	else if (_strcmp(opcode, "mod") == 0)
+	else if (strcmp(opcode, "mod") == 0)
         {
                 instruction->f = mod;
         }
-	else if (_strcmp(opcode, "add") == 0)
+	else if (strcmp(opcode, "add") == 0)
 	{
 		instruction->f = add;
 	}
-	else if (_strcmp(opcode, "sub") == 0)
+	else if (strcmp(opcode, "sub") == 0)
         {
                 instruction->f = sub;
         }
-	else if (_strcmp(opcode, "div_m") == 0)
+	else if (strcmp(opcode, "div_m") == 0)
         {
                 instruction->f = div_m;
         }
 
-	else if (_strcmp(opcode, "nop") == 0)
+	else if (strcmp(opcode, "nop") == 0)
 	{
 	instruction->f = nop;	
 	}
