@@ -333,7 +333,12 @@ int parse_instruction(char *line, instruction_t *instruction)
                 return (0);
         }
 
-        instruction->opcode = opcode;
+	instruction->opcode = opcode;
+
+	if (opcode[0] == '#'){
+		instruction->f = nop;
+	}
+
 
         if (strcmp(opcode, "push") == 0)
         {
