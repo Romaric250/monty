@@ -196,6 +196,126 @@ void mod(stack_t **stack, unsigned int line_number)
     pop(stack, line_number);
 }
 
+void pchar(stack_t **stack, unsigned int line_number)
+{
+    int value;
+
+    if (*stack == NULL)
+    {
+        fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    value = (*stack)->n;
+    if (value < 0 || value > 127)
+    {
+        fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    putchar(value);
+    putchar('\n');
+}
+
+void rotl(stack_t **stack, unsigned int line_number)
+{
+   stack_t *top_node;
+   stack_t *second_node;
+   stack_t *bottom_node;
+   (void) line_number;
+
+    if (*stack == NULL || (*stack)->next == NULL)
+        return;
+
+    top_node = *stack;
+    second_node = top_node->next;
+    bottom_node = top_node;
+    while (bottom_node->next != NULL)
+        bottom_node = bottom_node->next;
+
+    bottom_node->next = top_node;
+    top_node->prev = bottom_node;
+    top_node->next = NULL;
+    second_node->prev = NULL;
+    *stack = second_node;
+}
+void rotr(stack_t **stack, unsigned int line_number)
+{
+    stack_t *last_node;
+   stack_t *second_last_node;
+    (void) line_number;
+
+    if (*stack == NULL || (*stack)->next == NULL)
+        return;
+
+    last_node = *stack;
+    while (last_node->next != NULL)
+        last_node = last_node->next;
+
+    second_last_node = last_node->prev;
+    second_last_node->next = NULL;
+    last_node->prev = NULL;
+    last_node->next = *stack;
+    (*stack)->prev = last_node;
+    *stack = last_node;
+}
+
+void pstr(stack_t **stack, unsigned int line_number)
+{
+    int value;
+    stack_t *current;
+
+    (void) line_number;
+
+    if (*stack == NULL)
+    {
+        putchar('\n');
+        return;
+    }
+
+    current = *stack;
+    while (current != NULL && current->n != 0 && current->n >= 0 && current->n <= 127)
+    {
+        value = current->n;
+        putchar(value);
+        current = current->next;
+    }
+    putchar('\n');
+}
+
+void stack(stack_t **stack, unsigned int line_number)
+{
+    (void) line_number;
+    (void) stack;
+    /* Do nothing, since stack is the default behavior */
+}
+
+void queue(stack_t **stack, unsigned int line_number)
+{
+    stack_t *current;
+   stack_t *last;
+    (void) line_number;
+
+    if (*stack == NULL || (*stack)->next == NULL)
+        return;
+
+    current = *stack;
+    last = current;
+    while (last->next != NULL)
+        last = last->next;
+
+    current->prev = last;
+    last->next = current;
+    while (current->next != last)
+    {
+        current->next->prev = current;
+        current = current->next;
+    }
+    current->next = NULL;
+    *stack = last;
+}
+
+
 /**
  * parse_instruction - Parses an instruction in a line of Monty bytecode.
  * @line: Line of Monty bytecode.
@@ -238,6 +358,32 @@ int parse_instruction(char *line, instruction_t *instruction)
 	else if (strcmp(opcode, "swap") == 0)
         {
                 instruction->f = swap;
+        }
+	else if (strcmp(opcode, "rotr") == 0)
+        {
+                instruction->f = rotr;
+        }
+	else if (strcmp(opcode, "queue") == 0)
+        {
+                instruction->f = queue;
+        }
+	else if (strcmp(opcode, "stack") == 0)
+        {
+                instruction->f = stack;
+        }
+
+	else if (strcmp(opcode, "rotl") == 0)
+        {
+                instruction->f = rotl;
+        }
+	else if (strcmp(opcode, "pstr") == 0)
+        {
+                instruction->f = pstr;
+        }
+
+	else if (strcmp(opcode, "pchar") == 0)
+        {
+                instruction->f = pchar;
         }
 	else if (strcmp(opcode, "mod") == 0)
         {

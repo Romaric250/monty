@@ -13,7 +13,6 @@
 #define STACK_MODE 0
 #define QUEUE_MODE 1
 
-/* Data structures */
 
 /**
  * struct stack_s - Doubly linked list representation of a stack (or queue)
@@ -59,6 +58,11 @@ void div_m(stack_t **stack, unsigned int line_number);
 void mul(stack_t **stack, unsigned int line_number);
 void mod(stack_t **stack, unsigned int line_number);
 
+void queue(stack_t **stack, unsigned int line_number);
+void stack(stack_t **stack, unsigned int line_number);
+void rotr(stack_t **stack, unsigned int line_number);
+void rotl(stack_t **stack, unsigned int line_number);
+void pchar(stack_t **stack, unsigned int line_number);
 
 int _strcmp(char *s1, char *s2);
 char *_strtok(char *str, const char *delim);
